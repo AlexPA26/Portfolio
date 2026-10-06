@@ -1,0 +1,122 @@
+/* Estilos base y variables */
+:root
+{
+    --bg-color: #425483;
+    --card-bg: #dad0ff;
+    --text-main: #15283b;
+    --text-secondary: #13243b;
+    --accent: rgb(25, 25, 64);
+    --accent-hover: #0284c7;
+}
+
+img {
+    width: 6rem;
+}
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+/* Cabecera */
+header {
+    text-align: center;
+    padding: 2rem 2rem;
+    background-color: var(--card-bg);
+    border-bottom: 2px solid var(--accent);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    letter-spacing: 1px;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+}
+
+/* Contenedor principal - Usando CSS Grid para las zonas de los proyectos */
+.portfolio-container {
+    display: grid;
+    /* Esto crea columnas adaptables según el tamaño de la pantalla */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 3rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Tarjetas de proyecto */
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main h2 {
+    color: var(--accent);
+    margin-top: 0;
+    font-size: 1.5rem;
+}
+
+.main p {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    flex-grow: 1; /* Empuja los botones hacia abajo */
+}
+
+/* Botones y enlaces */
+.links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+.btn {
+    flex: 1;
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text-main);
+    background-color: rgba(56, 189, 248, 0.1);
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: var(--accent);
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    margin-top: 2rem;
+}
