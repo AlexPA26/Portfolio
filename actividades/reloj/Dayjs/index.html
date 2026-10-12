@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day.js · Aprende practicando</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- defer respeta este orden: librería → idioma → plugins → nuestro código. -->
+  <script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/locale/es.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/customParseFormat.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/relativeTime.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">JAVASCRIPT / LABORATORIO DE FECHAS</p>
+      <h1>Aprendiendo <span>Day.js</span></h1>
+      <p class="intro">Crea, transforma y compara fechas. Cambia los valores, observa el resultado y descubre el código
+        que hay detrás.</p>
+      <a class="button" href="#inicio">Empezar a practicar ↓</a>
+      <p class="today" id="today">Cargando la fecha actual…</p>
+    </div>
+  </header>
+  <nav aria-label="Secciones del tutorial" class="container navigation">
+    <a href="#inicio">Preparación</a><a href="#formato">Formato</a><a href="#calculos">Cálculos</a><a
+      href="#comparacion">Comparación</a><a href="#validacion">Validación</a><a href="#relativo">Tiempo relativo</a><a
+      href="#reto">Reto</a>
+  </nav>
+  <main class="container">
+    <noscript>
+      <p class="notice">Activa JavaScript para utilizar los ejemplos interactivos.</p>
+    </noscript>
+    <p id="load-error" class="notice" role="alert" hidden></p>
+    <section id="inicio" class="card">
+      <p class="eyebrow">00 / PREPARA EL TERRENO</p>
+      <h2>Una librería, muchas posibilidades</h2>
+      <p>Day.js facilita trabajar con fechas mediante métodos encadenables. <code>dayjs()</code> crea un objeto con la
+        fecha y hora actuales; <code>format()</code> lo convierte en texto.</p>
+      <p>Este HTML ya carga la librería, el idioma español y dos plugins por CDN. Ábrelo directamente en tu navegador
+        con conexión a Internet, sin instalar nada.</p>
+      <details>
+        <summary>Ver cómo se conecta todo</summary>
+        <pre><code>&lt;!-- Dentro del HTML, en este orden --&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"&gt;&lt;/script&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/locale/es.js"&gt;&lt;/script&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/customParseFormat.js"&gt;&lt;/script&gt;
+&lt;script defer src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/plugin/relativeTime.js"&gt;&lt;/script&gt;
+&lt;script defer src="indexDayjs.js"&gt;&lt;/script&gt;
+
+// Al principio de indexDayjs.js:
+dayjs.extend(window.dayjs_plugin_customParseFormat);
+dayjs.extend(window.dayjs_plugin_relativeTime);
+dayjs.locale('es');</code></pre>
+      </details>
+      <pre><code>const ahora = dayjs();
+const fecha = dayjs('2026-09-29');
+const desdeDate = dayjs(new Date());
+console.log(fecha.format('DD/MM/YYYY')); // 29/09/2026</code></pre>
+      <p class="note">Los ejemplos usan la hora local de tu navegador. Cambiar el idioma modifica los nombres de meses y
+        días, pero no la zona horaria.</p>
+    </section>
+
+    <section id="formato" class="card">
+      <p class="eyebrow">01 / DAR FORMA</p>
+      <h2>La misma fecha, a tu manera</h2>
+      <p><code>format()</code> sustituye los tokens por partes de la fecha. Escribe texto literal entre corchetes, por
+        ejemplo <code>[Hoy es] dddd</code>.</p>
+      <div class="controls">
+        <label>Fecha y hora<input id="format-date" type="datetime-local" value="2026-09-29T17:30"></label>
+        <label>Formato<input id="format-pattern" value="dddd, D [de] MMMM [de] YYYY, HH:mm" maxlength="180"></label>
+      </div>
+      <div class="presets" aria-label="Formatos de ejemplo"><button type="button"
+          data-format="DD/MM/YYYY">29/09/2026</button><button type="button" data-format="dddd, D [de] MMMM">martes, 29
+          de septiembre</button><button type="button" data-format="HH:mm:ss">17:30:00</button></div>
+      <div class="demo" aria-live="polite">
+        <pre><code id="format-code"></code></pre>
+        <p class="result" id="format-result"></p>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption>Tokens que usarás a menudo</caption>
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Significado</th>
+              <th>Ejemplo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>YYYY</td>
+              <td>Año completo</td>
+              <td>2026</td>
+            </tr>
+            <tr>
+              <td>MM / MMMM</td>
+              <td>Mes numérico / nombre</td>
+              <td>09 / septiembre</td>
+            </tr>
+            <tr>
+              <td>DD / dddd</td>
+              <td>Día del mes / de la semana</td>
+              <td>29 / martes</td>
+            </tr>
+            <tr>
+              <td>HH / mm / ss</td>
+              <td>Hora / minutos / segundos</td>
+              <td>17 / 30 / 00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note">¡Las mayúsculas importan! <code>MM</code> es el mes y <code>mm</code> son los minutos.</p>
+    </section>
+
+    <section id="calculos" class="card">
+      <p class="eyebrow">02 / MOVERSE EN EL TIEMPO</p>
+      <h2>Suma, resta y conserva el original</h2>
+      <p><code>add()</code> y <code>subtract()</code> devuelven un nuevo objeto. Day.js es <strong>inmutable</strong>:
+        debes guardar el resultado si quieres utilizar la fecha modificada.</p>
+      <div class="controls"><label>Fecha inicial<input id="calc-date" type="date"
+            value="2026-01-31"></label><label>Operación<select id="calc-operation">
+            <option value="add">Sumar</option>
+            <option value="subtract">Restar</option>
+          </select></label><label>Cantidad<input id="calc-amount" type="number" value="1" min="0" max="10000"
+            step="1"></label><label>Unidad<select id="calc-unit">
+            <option value="day">Días</option>
+            <option value="week">Semanas</option>
+            <option value="month" selected>Meses</option>
+            <option value="year">Años</option>
+          </select></label></div>
+      <div class="demo" aria-live="polite">
+        <pre><code id="calc-code"></code></pre>
+        <p class="result" id="calc-result"></p>
+      </div>
+      <p class="note">Prueba 31 de enero + 1 mes: se ajusta al último día de febrero. También puedes usar
+        <code>fecha.startOf('month')</code> y <code>fecha.endOf('month')</code> para obtener los límites del mes.
+      </p>
+    </section>
+
+    <section id="comparacion" class="card">
+      <p class="eyebrow">03 / PONER FECHAS EN PERSPECTIVA</p>
+      <h2>¿Cuánto tiempo hay entre dos días?</h2>
+      <p><code>fin.diff(inicio, 'day')</code> calcula la diferencia. El resultado es negativo si el final está antes del
+        inicio. Por defecto, <code>diff()</code> devuelve un entero; un tercer argumento <code>true</code> permite
+        decimales.</p>
+      <div class="controls"><label>Inicio<input id="compare-start" type="date"
+            value="2026-09-01"></label><label>Final<input id="compare-end" type="date" value="2026-09-29"></label></div>
+      <div class="demo" aria-live="polite">
+        <pre><code id="compare-code"></code></pre>
+        <p class="result" id="compare-result"></p>
+      </div>
+      <p class="note">El segundo argumento de <code>isSame()</code>, <code>isBefore()</code> e <code>isAfter()</code>
+        controla la precisión. Con <code>'day'</code> comparas días sin tener en cuenta la hora.</p>
+    </section>
+
+    <section id="validacion" class="card">
+      <p class="eyebrow">04 / COMPROBAR ANTES DE USAR</p>
+      <h2>No todas las fechas existen</h2>
+      <p>El plugin <code>customParseFormat</code> permite interpretar un formato concreto. Con <code>true</code> activas
+        la validación estricta: el día debe existir y el texto debe coincidir exactamente con el formato.</p>
+      <div class="controls"><label>Fecha en texto<input id="validate-date" type="text" value="31/02/2026"
+            maxlength="60"></label><label>Formato esperado<select id="validate-pattern">
+            <option>DD/MM/YYYY</option>
+            <option>YYYY-MM-DD</option>
+            <option>DD-MM-YYYY</option>
+          </select></label></div>
+      <div class="demo" aria-live="polite">
+        <pre><code id="validate-code"></code></pre>
+        <p class="result" id="validate-result"></p>
+      </div>
+      <p class="note">Sin validación estricta, algunas fechas desbordadas se normalizan a otro mes. Prueba
+        <code>29/02/2024</code> y <code>29/02/2025</code> para explorar los años bisiestos.
+      </p>
+    </section>
+
+    <section id="relativo" class="card">
+      <p class="eyebrow">05 / HABLAR COMO UNA PERSONA</p>
+      <h2>«Hace dos días» suena mejor</h2>
+      <p>El plugin <code>relativeTime</code> añade <code>fromNow()</code>. Devuelve una descripción aproximada respecto
+        al momento actual, usando el idioma configurado.</p>
+      <div class="controls"><label>Fecha de referencia<input id="relative-date" type="datetime-local"></label></div>
+      <div class="demo" aria-live="polite">
+        <pre><code id="relative-code"></code></pre>
+        <p class="result" id="relative-result"></p>
+      </div>
+      <p class="note"><code>fromNow(true)</code> elimina el prefijo o sufijo: «2 días». Para comparar con una fecha
+        concreta en lugar de ahora, utiliza <code>fecha.from(otraFecha)</code>.</p>
+    </section>
+
+    <section id="reto" class="card challenge">
+      <p class="eyebrow">06 / TU TURNO</p>
+      <h2>Programa el próximo recordatorio</h2>
+      <p>Partiendo del 29 de septiembre de 2026, suma 7 días y muestra el resultado como <strong>06/10/2026</strong>.
+        Inténtalo en la consola del navegador (F12 → Consola).</p>
+      <details>
+        <summary>Ver solución explicada</summary>
+        <pre><code>const inicio = dayjs('2026-09-29');
+const recordatorio = inicio.add(7, 'day');
+console.log(recordatorio.format('DD/MM/YYYY')); // 06/10/2026
+
+// También puedes encadenar los métodos:
+dayjs('2026-09-29').add(7, 'day').format('DD/MM/YYYY');</code></pre>
+        <p><code>add()</code> devuelve otro objeto Day.js y por eso puedes llamar después a <code>format()</code>, que
+          devuelve un string.</p>
+      </details>
+    </section>
+  </main>
+  <footer class="container">
+    <p>Sigue explorando en la <a href="https://day.js.org/docs/en/installation/installation" target="_blank"
+        rel="noopener noreferrer">documentación oficial de Day.js ↗</a>.</p>
+    <p>Consulta <a href="https://day.js.org/docs/en/display/format">formatos</a>, <a
+        href="https://day.js.org/docs/en/parse/string-format">validación estricta</a> y <a
+        href="https://day.js.org/docs/en/plugin/relative-time">tiempo relativo</a>.</p>
+  </footer>
+</body>
+
+</html>
