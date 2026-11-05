@@ -11,6 +11,8 @@ const heightPokemon = document.getElementById("height")
 const botonEnviar = document.getElementById("enviar")
 const valorBusqueda = document.getElementById("busqueda")
 
+let loading = document.getElementById("loading")
+
 botonEnviar.addEventListener('click', function (e)
 {
     e.preventDefault()
@@ -23,17 +25,22 @@ botonEnviar.addEventListener('click', function (e)
 
 function mostrarBusqueda(name)
 {
+    loading.textContent = "Cargando..."
     let fetchData = async (url) =>
     {
         try
         {
             let response = await fetch(url)
+
+            
             if (!response.ok)
             {
+                loading.textContent = "No se ha encontrado al Pokémon"
                 throw new Error("Error de red:" + response.statusText)
             }
             let data = await response.json()
 
+            
             imgPokemon.src = data.sprites.other.dream_world.front_default
             namePokemon.innerText = data.name
             weightPokemon.innerText = (data.weight / 10) + "kg"
@@ -54,6 +61,7 @@ function mostrarBusqueda(name)
                 cardElement.appendChild(newButton)
             });
             cardElement.hidden = false;
+            loading.textContent = ""
         }
         catch (error)
         {
@@ -67,7 +75,7 @@ function mostrarBusqueda(name)
 boton.addEventListener('click', function (e)
 {
     cardElement.hidden = true;
-    console.log("Botón pulsado");
+    loading.textContent = "Cargando..."
     let fetchData = async (url) =>
     {
         try
@@ -75,10 +83,12 @@ boton.addEventListener('click', function (e)
             let response = await fetch(url)
             if (!response.ok)
             {
+                loading.textContent = "No se ha encontrado al Pokémon"
                 throw new Error("Error de red:" + response.statusText)
             }
             let data = await response.json()
 
+            
             imgPokemon.src = data.sprites.other.dream_world.front_default
             namePokemon.innerText = data.name
             weightPokemon.innerText = (data.weight / 10) + "kg"
@@ -99,6 +109,7 @@ boton.addEventListener('click', function (e)
                 cardElement.appendChild(newButton)
             });
             cardElement.hidden = false;
+            loading.textContent = ""
         }
         catch (error)
         {
@@ -115,3 +126,8 @@ boton.addEventListener('click', function (e)
     fetchData(`${API}${number}`)
 
 })
+
+function mostrarRandom()
+{
+    
+}
