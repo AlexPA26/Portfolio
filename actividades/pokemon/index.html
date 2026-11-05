@@ -8,10 +8,18 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+
+    <form id="busquedaID" class="forms">
+        <label for="busqueda">Buscar Pokémon:</label>
+        <input id="busqueda" type="search" placeholder="Nombre del Pokémon..">
+        <button id="enviar" type="submit">Confirmar</button>
+    </form>
+
+    <br>
     
     <button class="boton">Generar PKMN</button>
     <div id="card" hidden>
-        <img id="image" src="/images/pokeball.png" alt="pokemon">
+        <img id="image" src="/actividades/pokemon/images/pokeball.png" alt="pokemon">
         <h1 id="name"></h1>
         <span id="weight"></span>
         <span id="height"></span>

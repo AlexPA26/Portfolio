@@ -9,10 +9,14 @@
     --accent-hover: #0284c7;
 }
 
-img
-{
+img{
     width: 8rem;
     box-sizing: content-box;
+}
+
+#weight
+{
+    color: white;
 }
 
 .main img {

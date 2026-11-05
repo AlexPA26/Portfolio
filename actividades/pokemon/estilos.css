@@ -21,16 +21,21 @@ body
     display: block;
     text-align: center;
     padding: 1rem;
-    color: red;
+    color: black;
+}
+
+.forms
+{
+    padding: 1rem;
 }
 
 #card
 {
     width: 20rem;
     height: 30rem;
-    background-color: rgb(179, 105, 105);
     border-radius: 15px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);    
+    background: linear-gradient(rgb(234, 234, 234), #4d4c4c);
 }
 
 #image
@@ -38,5 +43,58 @@ body
     width: 85%;
     max-width: 250px;
     max-height: 250px;
-    object-fit: contain;
+    box-sizing: content-box;
+}
+
+.fire {
+  background: red;
+}
+
+
+.grass {
+  background: linear-gradient(rgb(234, 234, 234), rgb(9 92 15));
+}
+
+.water {
+  background: linear-gradient(rgb(234, 234, 234), rgb(33 60 137));
+}
+
+.electric {
+  background: linear-gradient(rgb(234, 234, 234), rgb(213 208 56))
+}
+
+.poison {
+  background: linear-gradient(rgb(234, 234, 234), rgb(83 5 84))
+}
+
+.psychic {
+  background: linear-gradient(rgb(234, 234, 234), #c289d1)
+}
+
+.ground {
+  background: linear-gradient(rgb(234, 234, 234), #815911)
+}
+
+.rock {
+  background: linear-gradient(rgb(234, 234, 234), #381800)
+}
+
+.rock {
+  background: linear-gradient(rgb(234, 234, 234), #381800)
+}
+
+.ghost {
+  background: linear-gradient(rgb(234, 234, 234), #24004c)
+}
+
+.bug {
+  background: linear-gradient(rgb(234, 234, 234), #526c00)
+}
+
+.dragon {
+  background: linear-gradient(rgb(234, 234, 234), #1200a3)
+}
+
+.ice {
+  background: linear-gradient(rgb(234, 234, 234), #0096a9)
 }
