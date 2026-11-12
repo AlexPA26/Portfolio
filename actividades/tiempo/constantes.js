@@ -1,4 +1,4 @@
-export const ICONS = "../../node_modules/@meteocons/svg/fill/"
+export const ICONS = "/actividades/tiempo/svg/"
 
 export const weatherCodes =
 {
