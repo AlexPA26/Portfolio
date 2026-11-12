@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Tiempo</title>
+    <script src="script.js" type="module"></script>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+
+<div class="info">
+    <h1>Selector de tiempo</h1>
+    <form id="busquedaID" class="forms">
+        <label for="busqueda">Selecciona una ciudad:</label>
+        <select name="busqueda" id="busqueda">
+            <option value="Madrid">Madrid</option>
+            <option value="Mérida">Mérida</option>
+            <option value="Barcelona">Barcelona</option>
+        </select>
+        <button id="enviar" type="submit">Buscar</button>
+    </form>
+
+    <br>
+    
+    <p id="nombreCiudad"></p> 
+    <p id="temperaturaCiudad"></p>
+    <p id="humedadRelativa"></p>
+    <p id="velocidadViento"></p>
+    <p id="fechaCiudad"></p>
+    <p id="horaDeDatosCiudad"></p>
+
+    <img id="iconoTiempo">
+    <h2 id="descripcion"></h2>
+
+</div>
+
+
+
+
+
+
+</body>
+</html>

@@ -11,7 +11,16 @@ const heightPokemon = document.getElementById("height")
 const botonEnviar = document.getElementById("enviar")
 const valorBusqueda = document.getElementById("busqueda")
 
+const btnSiguiente = document.getElementById("btnSiguiente")
+
 let loading = document.getElementById("loading")
+
+let pokemonActual = null
+
+btnSiguiente.addEventListener('click', function ()
+{
+    siguiente()
+})
 
 botonEnviar.addEventListener('click', function (e)
 {
@@ -21,7 +30,43 @@ botonEnviar.addEventListener('click', function (e)
     mostrarBusqueda(busqueda)
 })
 
+function siguiente()
+{
+    const siguienteId = pokemonActual === null ? 1 : pokemonActual + 1
+    loading.textContent = "Cargando..."
 
+    fetch(`${API}${siguienteId}`).then(response =>
+        {
+            return response.json()
+        })
+        .then(data =>
+        {
+            pokemonActual = data.id
+            imgPokemon.src = data.sprites.other.dream_world.front_default
+            namePokemon.innerText = data.name
+            weightPokemon.innerText = (data.weight / 10) + "kg"
+            heightPokemon.innerText = (data.height / 10) + "m"
+            numberPokemon.innerText = "ID: " + data.id
+
+            cardElement.querySelectorAll(".type-button").forEach((button) => button.remove())
+            data.types.forEach((element) =>
+            {
+                let newButton = document.createElement("button")
+                newButton.classList.add(element.type.name)
+                newButton.classList.add("type-button")
+                newButton.innerText = element.type.name
+                cardElement.appendChild(newButton)
+            })
+
+            cardElement.hidden = false
+            loading.textContent = ""
+        })
+        .catch(error =>
+        {
+            loading.textContent = "No se ha podido cargar el siguiente Pokémon"
+            console.error(error)
+        })
+}
 
 function mostrarBusqueda(name)
 {
@@ -40,7 +85,8 @@ function mostrarBusqueda(name)
             }
             let data = await response.json()
 
-            
+            pokemonActual = data.id
+
             imgPokemon.src = data.sprites.other.dream_world.front_default
             namePokemon.innerText = data.name
             weightPokemon.innerText = (data.weight / 10) + "kg"
@@ -88,6 +134,7 @@ boton.addEventListener('click', function (e)
             }
             let data = await response.json()
 
+            pokemonActual = data.id
             
             imgPokemon.src = data.sprites.other.dream_world.front_default
             namePokemon.innerText = data.name
