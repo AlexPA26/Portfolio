@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Relief:wght@400;700&family=Google+Sans+Flex&display=swap" rel="stylesheet">
+
+    <script src="script.js" defer></script>
+    <title>Rapid-olina</title>
+</head>
+<body>
+    
+<div>
+    <h1>RAPID-OLINA</h1>
+    <h2>&#9981; Consulta el precio de la gasolina en España &#128200;</h2>
+    <p><i>Versión 13/11</i></p>
+    <hr>
+
+    <form action="" class="form" id="formulario">
+
+        <p class="label">Comunidad autónoma</p>
+        <select id="comunidad">
+            <option disabled selected value="">Selecciona una comunidad</option>
+        </select>
+
+        <p class="label">Provincia</p>
+        <select name="provincia" id="provincia">
+            <option disabled selected>Selecciona una provincia</option>
+        </select>
+
+        <p class="label">Municipio</p>
+
+        <select name="municipio" id="municipio">
+            <option disabled selected>Selecciona un municipio</option>
+        </select>
+
+        <p class="label">Tipo de combustible</p>
+        <select name="combustible" id="combustible">
+            <option disabled selected>Elige un tipo de combustible</option>
+            <option>Gasolina 95 E5</option>
+            <option>Gasóleo A</option>
+        </select>
+        
+        <input type="checkbox" id="abierto" name="abierto" value="abierto">
+        <label for="abierto">Abierto ahora</label>
+
+        <button type="button" class="buscar" id="buscar">Buscar</button>
+
+    </form>
+
+    <p id="testcontent"></p>
+</div>
+
+
+
+
+
+</body>
+</html>

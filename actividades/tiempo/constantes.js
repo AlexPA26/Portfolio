@@ -1,4 +1,4 @@
-export const ICONS = "./svg/"
+export const ICONS = "./svg"
 
 export const weatherCodes =
 {
