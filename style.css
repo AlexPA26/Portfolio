@@ -104,6 +104,10 @@ header span {
     flex-direction: column;
 }
 
+.highlight
+{
+    background-color: #f9ffc7;
+}
 .main h2 {
     margin: 0.25rem 0 1rem;
     color: #741838;
